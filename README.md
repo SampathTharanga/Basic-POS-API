@@ -35,28 +35,16 @@ src
 └───services        
 └───subscribers     
 └───types      
-app.js      => is the app’s entry point.
-api         => has the controllers for the endpoints.
-config      => has the environment variables and configuration related stuff.
-jobs        => have scheduled jobs.
-loaders     => have the code that runs when the app starts.
-models      => have the database models.
-services    => has business logic.
-subscribers => have the event handlers for queues, etc.
-types       => are type definitions for TypeScript projects.
+
+                                    
+* app.js      => is the app’s entry point.
+* api         => has the controllers for the endpoints.
+* config      => has the environment variables and configuration related stuff.
+* jobs        => have scheduled jobs.
+* loaders     => have the code that runs when the app starts.
+* models      => have the database models.
+* services    => has business logic.
+* subscribers => have the event handlers for queues, etc.
+* types       => are type definitions for TypeScript projects.
  
- 
- 
- Summary of Folder Structure
- 
- src
- │ app.js # App Entry
- └───api # Express route controllers for all the endpoints of the app
- └───config # Environment variables are configuration related
- └───jobs # Task Scheduling Definition for agenda.js
- └───loaders # Split the startup process into modules
- └───models # database model
- └───services # All business logic should be here
- └───subscribers # Event handler for asynchronous tasks
- └───types # Type declaration file for Typescript (d.ts)
  
