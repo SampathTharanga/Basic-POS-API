@@ -1,6 +1,6 @@
 # Basic POS System API
 
-List of Basic Commands,
+List of Basic Commands
  * npm init # This will trigger the initialization 
  * npm init --yes # This will trigger automatically populated initialization. 
  * npm install <module> # Where <module> is the name of the module you want to install 
@@ -21,4 +21,42 @@ List of Basic Commands,
  NOTE 01: As of npm 5, the --save option is no longer necessary. If you do "npm install my-package", it will add my-package as a dependency in your package.json file. 
  
  NOTE 02: devDependencies should contain packages which are used during development or which are used to build your bundle, for example, mocha, jscs, grunt-contrib-watch, gulp-jade and etc. These packages are neseccery only while you are developing your project, also ESlint is used to check everything during building your bundle.
+ 
+                                    
+
+                                    API Folder Structure
+src
+│   app.js          
+└───api             
+└───config          
+└───jobs            
+└───loaders         
+└───models          
+└───services        
+└───subscribers     
+└───types      
+app.js      => is the app’s entry point.
+api         => has the controllers for the endpoints.
+config      => has the environment variables and configuration related stuff.
+jobs        => have scheduled jobs.
+loaders     => have the code that runs when the app starts.
+models      => have the database models.
+services    => has business logic.
+subscribers => have the event handlers for queues, etc.
+types       => are type definitions for TypeScript projects.
+ 
+ 
+ 
+ Summary of Folder Structure
+ 
+ src
+ │ app.js # App Entry
+ └───api # Express route controllers for all the endpoints of the app
+ └───config # Environment variables are configuration related
+ └───jobs # Task Scheduling Definition for agenda.js
+ └───loaders # Split the startup process into modules
+ └───models # database model
+ └───services # All business logic should be here
+ └───subscribers # Event handler for asynchronous tasks
+ └───types # Type declaration file for Typescript (d.ts)
  
