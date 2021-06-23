@@ -3,7 +3,7 @@ const app = express()
 
 require('dotenv').config()
 
-const port = process.env.DB_PORT || 3000
+const port = process.env.DB_PORT
 
 
 
