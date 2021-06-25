@@ -16,4 +16,6 @@ router.get('/', async (req, res) => {
     }
 })
 
+//GET SPECIAL USER DETAILS
+
 module.exports = router
