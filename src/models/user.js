@@ -22,4 +22,7 @@ user_db.all = () => {
     })
 }
 
+//DISPLAY USER ID RELATED DETAILS
+user_db.
+
 module.exports = user_db
