@@ -9,7 +9,7 @@ const router = express.Router()
 //GET ALL USER DETAILS
 router.get('/', async (req, res) => {
     try{
-        let results = await db.all()
+        let results = await db.user_list()
         res.json(results)
     } catch(e) {
         console.log(e)
@@ -17,5 +17,13 @@ router.get('/', async (req, res) => {
 })
 
 //GET SPECIAL USER DETAILS
+router.get('/:username', async (req, res) => {
+    try{
+        let results = await db.user_detail(req.params.username)
+        res.json(results)
+    }catch(e){
+        console.log(e)
+    }
+})
 
 module.exports = router
