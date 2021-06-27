@@ -33,4 +33,15 @@ user_db.user_detail = (username) => {
     })
 }
 
+//ADD NEW USER
+user_db.addNewUser = ([data]) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`INSERT INTO pos_user (username, password, sec_question, sec_answer) VALUES (?)`, [data], (error, results) => {
+            if(error)
+                return reject(error)
+            return resolve(results[0])
+        })
+    })
+}
+
 module.exports = user_db

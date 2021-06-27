@@ -26,4 +26,20 @@ router.get('/:username', async (req, res) => {
     }
 })
 
+//ADD NEW USER
+router.post('/', async(req, res) => {
+    try{
+        let userValues = [
+            req.body.username,
+            req.body.password,
+            req.body.sec_question,
+            req.body.sec_answer
+        ]
+        let results = await db.addNewUser([userValues])
+        res.json(results)
+    } catch(e){
+        console.log(e)
+    }
+})
+
 module.exports = router
