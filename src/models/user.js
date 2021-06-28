@@ -1,7 +1,8 @@
 const mysql = require('mysql')
 
+
 const pool = mysql.createPool({
-    connectionLimit: 10,
+    connectionLimit : 10,
     host: process.env.DB_HOST || 'freedb.tech',
     user: process.env.DB_USER || 'freedbtech_Sampath',
     password: process.env.DB_PASS || '19910710',
@@ -10,6 +11,7 @@ const pool = mysql.createPool({
 })
 
 let user_db = {}
+
 
 //DISPLAY LIST OF ALL USERS.
 user_db.user_list = () => {
@@ -37,6 +39,17 @@ user_db.user_detail = (username) => {
 user_db.addNewUser = ([data]) => {
     return new Promise ((resolve, reject) => {
         pool.query(`INSERT INTO pos_user (username, password, sec_question, sec_answer) VALUES (?)`, [data], (error, results) => {
+            if(error)
+                return reject(error)
+            return resolve(results[0])
+        })
+    })
+}
+
+//UPDATE USER
+user_db.updateUser = (data, username) => {
+    return new Promise((resolve, reject) => {
+        pool.query('UPDATE pos_user SET password = ?, sec_question = ?, sec_answer = ? WHERE username = ?', [data.password, data.sec_question, data.sec_answer, username], (error, results) => {
             if(error)
                 return reject(error)
             return resolve(results[0])

@@ -42,4 +42,14 @@ router.post('/', async(req, res) => {
     }
 })
 
+//UPDATE USER
+router.put('/:username', async(req, res) => {
+    try{
+        let results = await db.updateUser(req.body, req.params.username)
+        res.json(results)
+    } catch(e){
+        console.log(e)
+    }
+})
+
 module.exports = router
