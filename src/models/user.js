@@ -57,4 +57,16 @@ user_db.updateUser = (data, username) => {
     })
 }
 
+
+//DELETE USER
+user_db.deleteUser = (username) => {
+    return new Promise((resolve, reject) => {
+        pool.query('DELETE FROM pos_user WHERE username = ?', [username], (error, results) => {
+            if(error)
+                return reject(error)
+            return resolve(results[0])
+        })
+    })
+}
+
 module.exports = user_db

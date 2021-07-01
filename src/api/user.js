@@ -52,4 +52,14 @@ router.put('/:username', async(req, res) => {
     }
 })
 
+//DELETE USER
+router.delete('/:username', async(req, res) => {
+    try{
+        let results = await db.deleteUser(req.params.username)
+        res.json(results)
+    } catch(e){
+        console.log(e)
+    }
+})
+
 module.exports = router
