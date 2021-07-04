@@ -1,39 +1,42 @@
-const pool = require('../config/mysql')
+var pool = require('../config/mysql')
 
 let user_db = {}
 
 
 //DISPLAY LIST OF ALL USERS
-/*user_db.user_list = () => {
+/*
+user_db.user_list = () => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM pos_user', (error, results) => {
-            if(error)
-                return reject(error)
-            return resolve(results)
+        pool.getConnection((error, connection) => {
+            if(error) console.log(error)
+            console.log("MYSQL Connection Established!", connection.threadId)
+            pool.query('SELECT * FROM pos_user', (error, results) => {
+                if(error) console.log(error)
+                console.log('User Query Results: ', results)
+                return resolve(results)
+                connection.release(error => { if(error) console.log(error) })
+            })
         })
     }) 
-}
-*/
+}*/
 
 
+//DISPLAY LIST OF ALL USERS
 user_db.user_list = () => {
     return new Promise((resolve, reject) => {
         pool.query('SELECT * FROM pos_user', (error, results) => {
-            if(!error)
-                return resolve(results)
+            if (error) return reject(error)
+            //console.log('User Query Results: ', results)
+            return resolve(results)
         })
-        .on('error', error => {
-            reject(new Error(error))
-        })
-    }) 
+    })
 }
-
 
 //DISPLAY USER ID RELATED DETAILS
 user_db.user_detail = (username) => {
     return new Promise((resolve, reject) => {
         pool.query('SELECT * FROM pos_user WHERE username = ?', [username], (error, results) => {
-            if(error)
+            if (error)
                 return reject(error)
             return resolve(results[0])
         })
@@ -42,9 +45,9 @@ user_db.user_detail = (username) => {
 
 //ADD NEW USER
 user_db.addNewUser = ([data]) => {
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         pool.query(`INSERT INTO pos_user (username, password, sec_question, sec_answer) VALUES (?)`, [data], (error, results) => {
-            if(error)
+            if (error)
                 return reject(error)
             return resolve(results[0])
         })
@@ -55,7 +58,7 @@ user_db.addNewUser = ([data]) => {
 user_db.updateUser = (data, username) => {
     return new Promise((resolve, reject) => {
         pool.query('UPDATE pos_user SET password = ?, sec_question = ?, sec_answer = ? WHERE username = ?', [data.password, data.sec_question, data.sec_answer, username], (error, results) => {
-            if(error)
+            if (error)
                 return reject(error)
             return resolve(results[0])
         })
@@ -67,7 +70,7 @@ user_db.updateUser = (data, username) => {
 user_db.deleteUser = (username) => {
     return new Promise((resolve, reject) => {
         pool.query('DELETE FROM pos_user WHERE username = ?', [username], (error, results) => {
-            if(error)
+            if (error)
                 return reject(error)
             return resolve(results[0])
         })

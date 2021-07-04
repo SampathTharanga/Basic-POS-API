@@ -8,10 +8,10 @@ const pool = mysql.createPool({
     port: process.env.DB_PORT || 3306
 })
 
-var getConnection = function (callback) {
-    pool.getConnection(function(err, connection) {
-        callback(err, connection)
-    })
-}
 
-module.exports = getConnection
+pool.getConnection((error) => {
+    if(error) throw new Error(error)
+    console.log('Connected to database!!')
+})
+
+module.exports = pool
