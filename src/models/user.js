@@ -1,33 +1,22 @@
-var pool = require('../config/mysql')
+const { connect } = require('../api/user')
+const pool = require('../config/mysql')
 
 let user_db = {}
 
 
+
 //DISPLAY LIST OF ALL USERS
-/*
 user_db.user_list = () => {
     return new Promise((resolve, reject) => {
         pool.getConnection((error, connection) => {
-            if(error) console.log(error)
-            console.log("MYSQL Connection Established!", connection.threadId)
-            pool.query('SELECT * FROM pos_user', (error, results) => {
-                if(error) console.log(error)
-                console.log('User Query Results: ', results)
+            if (error) console.error(error)
+            console.log('MySQL Connection Establish!', connection.threadId)
+            connection.query('SELECT * FROM pos_user', (error, results) => {
+                if (error) return reject(error)
+                //console.log('User Query Results: ', results)
                 return resolve(results)
-                connection.release(error => { if(error) console.log(error) })
+                connection.release(error => { if (error) console.error(error) })
             })
-        })
-    }) 
-}*/
-
-
-//DISPLAY LIST OF ALL USERS
-user_db.user_list = () => {
-    return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM pos_user', (error, results) => {
-            if (error) return reject(error)
-            //console.log('User Query Results: ', results)
-            return resolve(results)
         })
     })
 }
@@ -35,11 +24,16 @@ user_db.user_list = () => {
 //DISPLAY USER ID RELATED DETAILS
 user_db.user_detail = (username) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM pos_user WHERE username = ?', [username], (error, results) => {
-            if (error)
-                return reject(error)
-            return resolve(results[0])
+        pool.getConnection((error, connection) => {
+            if(error) console.error(error)
+            console.log('MySQL Connection Establish!', connection.threadId)
+            connection.query('SELECT * FROM pos_user WHERE username = ?', [username], (error, results) => {
+                if (error) return reject(error)
+                return resolve(results[0])
+                connection.release(error => { if(error) console.error(error) })
+            })
         })
+
     })
 }
 

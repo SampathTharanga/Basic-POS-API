@@ -3,7 +3,21 @@ const db = require('../models/user')
 const router = express.Router()
 
 
-/// USER ROUTES ///
+/**
+ * ***************************************************************
+ *                LIST OF USER ENDPOINTS (USER ROUTES)
+ * ***************************************************************
+ * 
+ * => INSERT
+ * => SELECT ALL
+ * => SELECT SPECIAL USER
+ * => UPDATE
+ * => DELETE
+ * => CHECK USERNAME
+ * => CHECK EMAIL
+ * 
+ * **************************************************************
+ */
 
 
 //GET ALL USER DETAILS
